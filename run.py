@@ -11,12 +11,14 @@ options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=./User_Data')
 driver = webdriver.Chrome(chrome_path, options=options)
 
-message = "https://rapidbox.in/s/R222642D2"
+message = "Ads : Download and Register : https://rapidbox.in/s/R222642D2"
 
 url = 'https://web.whatsapp.com'
 driver.get(url)
 
 time.sleep(20)
+working = open("working.csv", "a")
+
 for i in range(0, len(df['Contacts'])):
     send_to = str(df['Contacts'][i])
     execu = '''
@@ -27,11 +29,17 @@ for i in range(0, len(df['Contacts'])):
     '''.format(send_to, message)
 
     driver.execute_script(execu)
-    # message_box = driver.find_elements_by_css_selector("div._2S1VP.copyable-text.selectable-text")
-    # message_box[-1].send_keys(message)
+    try:
+        time.sleep(1)
+        send_button = driver.find_elements_by_css_selector("div._1JNuk")[-1]
+        time.sleep(1)
+        send_button.click()
+        working.write(send_to + "\n")
+    except:
+        time.sleep(1)
+        ok_button = driver.find_elements_by_css_selector("div.S7_rT.FV2Qy")[-1]
+        time.sleep(1)
+        ok_button.click()
     time.sleep(1)
-    send_button = driver.find_elements_by_css_selector("div._1JNuk")[-1]
-    send_button.click()
-    time.sleep(4)
-
+working.close()
 driver.close()
