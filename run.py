@@ -11,7 +11,13 @@ options = webdriver.ChromeOptions()
 options.add_argument('--user-data-dir=./User_Data')
 driver = webdriver.Chrome(chrome_path, options=options)
 
-message = "Ads : Download and Register : https://rapidbox.in/s/R222642D2"
+message = "\
+If you Download and Register on this App we will get Rupee 10. \
+We use this amount to help needy people. \
+Thanks. \
+This message is sent by bot  \
+App Link : https://rapidbox.in/s/R222642D2 \
+"
 
 url = 'https://web.whatsapp.com'
 driver.get(url)
@@ -40,6 +46,6 @@ for i in range(0, len(df['Contacts'])):
         ok_button = driver.find_elements_by_css_selector("div.S7_rT.FV2Qy")[-1]
         time.sleep(1)
         ok_button.click()
-    time.sleep(1)
+    time.sleep(3)
 working.close()
 driver.close()
